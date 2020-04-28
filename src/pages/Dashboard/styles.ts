@@ -6,19 +6,27 @@ interface FormProps {
 }
 
 export const Title = styled.h1`
-    font-size: 48px;
+    font-size: 2.5em;
     color: #3a3a3a;
-    margin-top: 80px;
+    margin-top: 1em;
     max-width: 450px;
     line-height: 56px;
 `;
 
 export const Form = styled.form<FormProps>`
-    margin-top: 40px;
-    max-width: 700px;
+    margin-top: 3em;
+    max-width: 75%;
     display: flex;
+    @media (max-width: 600px) {
+        max-width: 100%;
+        flex-direction: column;
+    }
 
     input {
+        @media (max-width: 600px) {
+            flex: auto;
+            border-radius: 5px 5px 0 0;
+        }
         flex: 1;
         height: 70px;
         padding: 0 24px;
@@ -39,6 +47,11 @@ export const Form = styled.form<FormProps>`
     }
 
     button {
+        @media (max-width: 600px) {
+            width: 100%;
+            height: 2.5em;
+            border-radius: 0 0 5px 5px;
+        }
         width: 210px;
         height: 70px;
         background: #04d361;
@@ -55,8 +68,11 @@ export const Form = styled.form<FormProps>`
 `;
 
 export const Repositories = styled.div`
-    max-width: 700px;
-    margin-top: 80px;
+    max-width: 75%;
+    margin-top: 5em;
+    @media (max-width: 600px) {
+        max-width: 100%;
+    }
 
     a + a {
         margin-top: 16px;
@@ -80,6 +96,10 @@ export const Repositories = styled.div`
             width: 64px;
             height: 64px;
             border-radius: 50%;
+            @media (max-width: 600px) {
+                width: 50px;
+                height: 50px;
+            }
         }
 
         div {
@@ -88,11 +108,17 @@ export const Repositories = styled.div`
             strong {
                 font-size: 20px;
                 color: #3d3d4d;
+                @media (max-width: 600px) {
+                    font-size: 1em;
+                }
             }
             p {
                 font-size: 18px;
                 color: #a8a8b3;
                 margin-top: 4px;
+                @media (max-width: 600px) {
+                    font-size: 0.8em;
+                }
             }
         }
 

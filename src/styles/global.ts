@@ -14,13 +14,16 @@ export default createGlobalStyle`
         -webkit-font-smoothing: antialiased;
     }
     body, input, button{
-        font: 16px Roboto, sans-serif;
+        font: 1em Roboto, sans-serif;
     }
 
     #root{
-        max-width: 960px;
+        max-width: 70%;
         margin: 0 auto;
-        padding: 44px 20px;
+        padding: 3em 0em;
+        @media (max-width: 600px){
+            max-width: 88%;
+        }
     }
     button{
         cursor:pointer;
