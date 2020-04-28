@@ -1,10 +1,10 @@
 
-<img src="https://raw.githubusercontent.com/Luiz-Pedro/cocktails/master/src/Assets/title.png" width="auto" height="100">
+<img src="https://raw.githubusercontent.com/Luiz-Pedro/githubExplorer/master/src/assets/logo.svg" width="auto" height="70">
 
 
-# A simple repository explorer.
+# A simple github repository explorer.
 
-*Application made to be a huge database for cocktails recipes. Created using the api (thecocktaildb.com)*
+*Application made to be a simple github repository explorer. Created using the github api.*
 <img src="https://raw.githubusercontent.com/Luiz-Pedro/cocktails/master/src/Assets/mockup.png" width="auto" height="400">
 
 ## How to use:
