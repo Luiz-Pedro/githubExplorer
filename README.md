@@ -1,11 +1,13 @@
 
-<img src="https://raw.githubusercontent.com/Luiz-Pedro/githubExplorer/master/src/assets/logo.svg" width="auto" height="70">
+<img src="https://raw.githubusercontent.com/Luiz-Pedro/githubExplorer/master/src/assets/logo.svg" width="auto" height="50">
 
 
 # A simple github repository explorer.
 
 *Application made to be a simple github repository explorer. Created using the github api.*
-<img src="https://raw.githubusercontent.com/Luiz-Pedro/githubExplorer/master/src/assets/mockup.png" width="auto" height="400">
+<div style="text-align:center; margin-top: 10px;">
+    <img src="https://raw.githubusercontent.com/Luiz-Pedro/githubExplorer/master/src/assets/mockup.png" width="auto" height="300">
+</div>
 
 ## How to use:
 You should use the *"user/repository"* format to successfully search for a github repository.
