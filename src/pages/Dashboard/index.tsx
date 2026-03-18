@@ -1,9 +1,17 @@
-import { useState, useEffect, FormEvent } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, FormEvent } from 'react'
 import { FiChevronRight } from 'react-icons/fi'
 import api from '../../services/api'
 import logo from '../../assets/logo.svg'
-import { Title, Form, Repositories, Error } from './styles'
+import {
+    Title,
+    Form,
+    Repositories,
+    Error,
+    ResultsTitle,
+    SkeletonContainer,
+    SkeletonAvatar,
+    SkeletonText,
+} from './styles'
 
 interface Repository {
     full_name: string
@@ -17,22 +25,9 @@ interface Repository {
 const Dashboard = () => {
     const [query, setQuery] = useState('')
     const [inputError, setInputError] = useState('')
-    const [repositories, setRepositories] = useState<Repository[]>(() => {
-        const storageRepositories = localStorage.getItem(
-            '@githubExplorer:repositories',
-        )
-        if (storageRepositories) {
-            return JSON.parse(storageRepositories)
-        }
-        return []
-    })
-
-    useEffect(() => {
-        localStorage.setItem(
-            '@githubExplorer:repositories',
-            JSON.stringify(repositories),
-        )
-    }, [repositories])
+    const [repositories, setRepositories] = useState<Repository[]>([])
+    const [searchQuery, setSearchQuery] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
 
     async function handleAddRepository(
         e: FormEvent<HTMLFormElement>,
@@ -45,14 +40,18 @@ const Dashboard = () => {
         }
 
         try {
+            setIsLoading(true)
             const response = await api.get<Repository>(`/repos/${query}`)
             const repository = response.data
 
             setRepositories([...repositories, repository])
+            setSearchQuery(query)
             setQuery('')
             setInputError('')
         } catch {
             setInputError('Error searching for this repository')
+        } finally {
+            setIsLoading(false)
         }
     }
 
@@ -72,11 +71,29 @@ const Dashboard = () => {
 
             {inputError && <Error>{inputError}</Error>}
 
+            {searchQuery && (
+                <ResultsTitle>
+                    {repositories.length} repositories results for {searchQuery}:
+                </ResultsTitle>
+            )}
+
+            {isLoading && (
+                <SkeletonContainer>
+                    <SkeletonAvatar />
+                    <div>
+                        <SkeletonText $width="40%" />
+                        <SkeletonText $width="70%" />
+                    </div>
+                </SkeletonContainer>
+            )}
+
             <Repositories>
                 {repositories.map((repository) => (
-                    <Link
+                    <a
                         key={repository.full_name}
-                        to={`/repository/${repository.full_name}`}
+                        href={`https://github.com/${repository.full_name}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
                     >
                         <img
                             src={repository.owner.avatar_url}
@@ -87,7 +104,7 @@ const Dashboard = () => {
                             <p>{repository.description}</p>
                         </div>
                         <FiChevronRight size={20} />
-                    </Link>
+                    </a>
                 ))}
             </Repositories>
         </>

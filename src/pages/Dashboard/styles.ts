@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 
 interface FormProps {
     $hasError: boolean
@@ -68,7 +68,7 @@ export const Form = styled.form<FormProps>`
 
 export const Repositories = styled.div`
     max-width: 75%;
-    margin-top: 5em;
+    margin-top: 2em;
     @media (max-width: 600px) {
         max-width: 100%;
     }
@@ -132,4 +132,60 @@ export const Error = styled.span`
     display: block;
     color: #c53030;
     margin-top: 20px;
+`
+
+export const ResultsTitle = styled.h2`
+    font-size: 1.2em;
+    color: #3a3a3a;
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+    max-width: 75%;
+`
+
+const skeletonKeyframes = keyframes`
+    0% {
+        background-position: -200px 0;
+    }
+    100% {
+        background-position: calc(200px + 100%) 0;
+    }
+`
+
+export const SkeletonContainer = styled.div`
+    margin-top: 6em;
+    background: #fff;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 75%;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    animation: ${skeletonKeyframes} 1.2s ease-in-out infinite;
+    background-color: #f0f0f0;
+    background-image: linear-gradient(
+        90deg,
+        #f0f0f0,
+        #e0e0e0,
+        #f0f0f0
+    );
+    background-size: 200px 100%;
+`
+
+export const SkeletonAvatar = styled.div`
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+`
+
+interface SkeletonTextProps {
+    $width?: string
+}
+
+export const SkeletonText = styled.div<SkeletonTextProps>`
+    height: 16px;
+    width: ${(props) => props.$width || '100%'};
+    border-radius: 4px;
+    background-color: #e0e0e0;
+    margin-bottom: 8px;
 `
