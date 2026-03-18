@@ -1,49 +1,46 @@
-import React, { useState, useEffect } from 'react';
-import { useRouteMatch, Link } from 'react-router-dom';
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
-import { Header, RepositoryInfo, Issues } from './styles';
-import logo from '../../assets/logo.svg';
-
-import api from '../../services/api';
-
-interface RepositoryParams {
-    repositoryname: string;
-}
+import { useState, useEffect } from 'react'
+import { useParams, Link } from 'react-router-dom'
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import { Header, RepositoryInfo, Issues } from './styles'
+import logo from '../../assets/logo.svg'
+import api, { AxiosResponse } from '../../services/api'
 
 interface Repository {
-    full_name: string;
-    description: string;
-    stargazers_count: number;
-    forks_count: number;
-    open_issues_count: number;
+    full_name: string
+    description: string
+    stargazers_count: number
+    forks_count: number
+    open_issues_count: number
     owner: {
-        login: string;
-        avatar_url: string;
-    };
+        login: string
+        avatar_url: string
+    }
 }
 
 interface Issue {
-    id: number;
-    title: string;
-    html_url: string;
+    id: number
+    title: string
+    html_url: string
     user: {
-        login: string;
-    };
+        login: string
+    }
 }
 
-const Repository: React.FC = () => {
-    const { params } = useRouteMatch<RepositoryParams>();
-    const [repository, setRepository] = useState<Repository | null>(null);
-    const [issues, setIssues] = useState<Issue[]>([]);
+const RepositoryPage = () => {
+    const { repositoryname } = useParams<{ repositoryname: string }>()
+    const [repository, setRepository] = useState<Repository | null>(null)
+    const [issues, setIssues] = useState<Issue[]>([])
 
     useEffect(() => {
-        api.get(`repos/${params.repositoryname}`).then((response) => {
-            setRepository(response.data);
-        });
-        api.get(`repos/${params.repositoryname}/issues`).then((response) => {
-            setIssues(response.data);
-        });
-    }, [params.repositoryname]);
+        if (!repositoryname) return
+        
+        api.get<Repository>(`repos/${repositoryname}`).then((response: AxiosResponse<Repository>) => {
+            setRepository(response.data)
+        })
+        api.get<Issue[]>(`repos/${repositoryname}/issues`).then((response: AxiosResponse<Issue[]>) => {
+            setIssues(response.data)
+        })
+    }, [repositoryname])
 
     return (
         <>
@@ -85,7 +82,7 @@ const Repository: React.FC = () => {
 
             <Issues>
                 {issues.map((issue) => (
-                    <a key={issue.id} href={issue.html_url}>
+                    <a key={issue.id} href={issue.html_url} target="_blank" rel="noopener noreferrer">
                         <div>
                             <strong>{issue.title}</strong>
                             <p>{issue.user.login}</p>
@@ -95,6 +92,7 @@ const Repository: React.FC = () => {
                 ))}
             </Issues>
         </>
-    );
-};
-export default Repository;
+    )
+}
+
+export default RepositoryPage

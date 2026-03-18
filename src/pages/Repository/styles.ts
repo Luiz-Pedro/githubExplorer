@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const Header = styled.header`
     display: flex;
@@ -20,7 +20,7 @@ export const Header = styled.header`
             margin-right: 4px;
         }
     }
-`;
+`
 
 export const RepositoryInfo = styled.section`
     margin-top: 80px;
@@ -89,7 +89,7 @@ export const RepositoryInfo = styled.section`
             }
         }
     }
-`;
+`
 
 export const Issues = styled.div`
     margin-top: 4.5em;
@@ -131,4 +131,4 @@ export const Issues = styled.div`
             color: #cbcbb6;
         }
     }
-`;
+`
