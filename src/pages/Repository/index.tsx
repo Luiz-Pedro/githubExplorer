@@ -48,7 +48,7 @@ const RepositoryPage = () => {
                 <img src={logo} alt="GitHub Explorer" />
                 <Link to="/">
                     <FiChevronLeft size={16} />
-                    Voltar
+                    Back
                 </Link>
             </Header>
             {repository && (
@@ -74,7 +74,7 @@ const RepositoryPage = () => {
                         </li>
                         <li>
                             <strong>{repository.open_issues_count}</strong>
-                            <span>Issues abertas</span>
+                            <span>Open issues</span>
                         </li>
                     </ul>
                 </RepositoryInfo>

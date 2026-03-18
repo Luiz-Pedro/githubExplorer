@@ -40,7 +40,7 @@ const Dashboard = () => {
         e.preventDefault()
 
         if (!query) {
-            setInputError('Digite o autor/nome do repositório.')
+            setInputError('Enter the repository author/name')
             return
         }
 
@@ -52,22 +52,22 @@ const Dashboard = () => {
             setQuery('')
             setInputError('')
         } catch {
-            setInputError('Erro na busca por esse repositório.')
+            setInputError('Error searching for this repository')
         }
     }
 
     return (
         <>
             <img src={logo} alt="logo" />
-            <Title>Explore repositórios no GitHub</Title>
+            <Title>Explore GitHub repositories</Title>
 
             <Form $hasError={Boolean(inputError)} onSubmit={handleAddRepository}>
                 <input
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    placeholder="Digite o autor/nome do repositório"
+                    placeholder="Enter the repository author/name"
                 />
-                <button type="submit">Pesquisar</button>
+                <button type="submit">Search</button>
             </Form>
 
             {inputError && <Error>{inputError}</Error>}
